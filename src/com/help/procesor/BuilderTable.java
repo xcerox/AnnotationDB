@@ -47,6 +47,21 @@ public class BuilderTable {
 		return cleanComma + ");";
 	}
 
+	public String builder(String className) throws AnnotacionException, ClassNotFoundException 
+	{
+		if(className.isEmpty())
+			throw new RuntimeException("El className esta en blanco");
+		try
+		{
+			return builder(Class.forName(className));	
+		}
+		catch(AnnotacionException exception)
+		{
+			throw new AnnotacionException(exception.getMessage());
+		}
+		
+	}
+
 	private List<String> getColumns(Class<?> model){
 		
 		List<String> columns = new ArrayList<>();
@@ -104,4 +119,6 @@ public class BuilderTable {
 		return textConstraint.toString();
 	}
 
+	
+	
 }
